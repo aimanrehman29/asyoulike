@@ -1,7 +1,8 @@
 import React from 'react';
+import Image from 'next/image';
 
 const ProductGrid = () => {
-  const products =[
+  const products = [
     {
       id: 1,
       name: 'Wireless Earbuds, IPX8',
@@ -163,52 +164,65 @@ const ProductGrid = () => {
       rating: 4.8,
     },
   ];
-  
 
-    return (
-      <div className="grid grid-cols-1 gap-4 p-6 sm:grid-cols-2 md:grid-cols-4 overflow-hidden">
+  return (
+    <div className="p-4">
+      {/* Responsive Grid */}
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {products.map((product) => (
           <div
             key={product.id}
             className="bg-white shadow-lg rounded-lg p-4 flex flex-col items-center"
           >
-            <img
+            {/* Product Image */}
+            <Image
               src={product.imageUrl}
               alt={product.name}
-              className=" object-cover rounded-lg"
+              className="object-cover rounded-lg"
+              width={200}
+              height={200}
             />
-            <h2 className="text-xl font-semibold mt-4 text-center">
+            
+            {/* Product Name */}
+            <h2 className="text-lg sm:text-xl font-semibold mt-4 text-center">
               {product.name}
             </h2>
-            <p className="text-gray-600 mt-2 text-center">{product.description}</p>
+            
+            {/* Product Description */}
+            <p className="text-sm sm:text-base text-gray-600 mt-2 text-center">
+              {product.description}
+            </p>
+            
+            {/* Rating */}
             <div className="flex items-center mt-2">
               <span className="text-yellow-500">
                 {'⭐'.repeat(Math.round(product.rating))}
                 {'☆'.repeat(5 - Math.round(product.rating))}
               </span>
-              <span className="ml-2 text-gray-500">({product.rating})</span>
+              <span className="ml-2 text-sm sm:text-base text-gray-500">
+                ({product.rating})
+              </span>
             </div>
-            <p className="text-lg font-semibold mt-4">{product.price}</p>
-           
-           
-            {/* Buy Now Button */}
-            <button className="mt-2 bg-red-500 text-black px-6 py-2 rounded-lg hover:bg-red-700 transition-colors">
-              Buy Now
-            </button>
-            <button className="mt-4 bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition-colors">
-              Add to Cart
-            </button>
+            
+            {/* Product Price */}
+            <p className="text-base sm:text-lg font-semibold mt-4">
+              {product.price}
+            </p>
+            
+            {/* Buttons */}
+            <div className="mt-2 flex flex-wrap justify-center gap-2">
+              <button className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors">
+                Buy Now
+              </button>
+              <button className="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors">
+                Add to Cart
+              </button>
+            </div>
           </div>
         ))}
       </div>
-    );
-  };
-  
-  export default ProductGrid;
-  
+    </div>
+  );
+};
 
-
-
-
-
-
+export default ProductGrid;
